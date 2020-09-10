@@ -20,10 +20,11 @@ export const useDebouncedRef = (value, delay = 200) => {
 }
 
 import { ref, onMounted, onUnmounted } from 'vue'
-export  function useScroll() {
+
+export function useScroll() {
   const top = ref(0)
 
-  function update(e) {
+  function update() {
     top.value = window.scrollY
   }
 
@@ -35,10 +36,10 @@ export  function useScroll() {
     window.removeEventListener('scroll', update)
   })
 
-  return { top }
+  return {top}
 }
 
-export  function useMousePosition() {
+export function useMousePosition() {
   const x = ref(10)
   const y = ref(10)
 
@@ -55,5 +56,23 @@ export  function useMousePosition() {
     window.removeEventListener('mousemove', update)
   })
 
-  return { x, y }
+  return {x, y}
+}
+
+import { reactive, watch } from 'vue'
+
+
+export function useStorage(key, defaultValue = {}) {
+  const data = reactive(
+    (localStorage[key] && JSON.parse(localStorage[key])) || defaultValue
+  )
+
+  watch(() => data, () => {
+    localStorage[key] = JSON.stringify(data)
+    console.log('data mutates', data)
+  }, {
+    deep: true
+  })
+
+  return data
 }

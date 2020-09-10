@@ -1,9 +1,10 @@
 <template>
+  <render-func name="123"/>
+  <todo/>
   <input v-model="text"/>{{ text }}
   <ul>
     <Fragment :data="[5,3,1,6,9,4,2,8]"/>
   </ul>
-  <todo/>
 </template>
 
 <script>

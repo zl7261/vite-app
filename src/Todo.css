@@ -30,8 +30,8 @@ input[type="checkbox"] {
     display: none;
 }
 
-.todoapp {
-    width: 500px;
+.todo-app {
+    width: 400px;
     background: #fff;
     margin: 130px auto 40px auto;
     position: relative;
@@ -39,20 +39,20 @@ input[type="checkbox"] {
     0 25px 50px 0 rgba(0, 0, 0, 0.1);
 }
 
-.todoapp input::-webkit-input-placeholder {
+.todo-app input::-webkit-input-placeholder {
     font-style: italic;
     font-weight: 300;
     color: #e6e6e6;
 }
 
-.todoapp input::-moz-placeholder {
+.todo-app input::-moz-placeholder {
     font-style: italic;
     font-weight: 300;
     color: #e6e6e6;
 }
 
 
-.todoapp h3 {
+.todo-app h3 {
     position: absolute;
     top: -155px;
     width: 100%;
@@ -112,7 +112,6 @@ label[for='toggle-all'] {
     content: '❯';
     font-size: 22px;
     color: #e6e6e6;
-    padding: 10px 27px 10px 27px;
 }
 
 .toggle-all:checked:before {
@@ -164,14 +163,6 @@ label[for='toggle-all'] {
     border: none; /* Mobile Safari */
 }
 
-.todo-list li .toggle:after {
-    content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="-10 -18 100 135"><circle cx="50" cy="50" r="50" fill="none" stroke="#ededed" stroke-width="3"/></svg>');
-}
-
-.todo-list li .toggle:checked:after {
-    content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="-10 -18 100 135"><circle cx="50" cy="50" r="50" fill="none" stroke="#bddad5" stroke-width="3"/><path fill="#5dc2af" d="M72 25L42 71 27 56l-4 4 20 20 34-52z"/></svg>');
-}
-
 .todo-list li label {
     white-space: pre-line;
     word-break: break-all;
@@ -179,7 +170,7 @@ label[for='toggle-all'] {
     margin-left: 45px;
     display: block;
     line-height: 1.2;
-    transition: color 0.4s;
+    transition: color 0.3s;
 }
 
 .todo-list li.completed label {
@@ -198,11 +189,11 @@ label[for='toggle-all'] {
     font-size: 30px;
     color: #cc9a9a;
     margin: auto 0 11px;
-    transition: color 0.2s ease-out;
+    transition: color 3s;
 }
 
 .todo-list li .destroy:hover {
-    color: #af5b5e;
+    color: red;
 }
 
 .todo-list li .destroy:after {
@@ -334,9 +325,8 @@ html .clear-completed:active {
     }
 
     .toggle-all {
-        -webkit-transform: rotate(90deg);
         transform: rotate(90deg);
-        -webkit-appearance: none;
+        appearance: none;
     }
 }
 

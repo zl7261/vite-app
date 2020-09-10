@@ -14,7 +14,6 @@ export default {
     props.data.slice(1).forEach(v=>{
       v>flag? right.push(v): left.push(v)
     })
-    console.log(left,right,flag)
     return {left, right, flag}
   }
 }

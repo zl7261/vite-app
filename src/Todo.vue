@@ -1,5 +1,5 @@
 <template>
-  <section class="todoapp">
+  <section class="todo-app">
     <header class="header" :class="{fixed:top>130}">
 
       <h3>{{ x }},{{ y }}</h3>
@@ -15,8 +15,7 @@
         <li v-for="todo in todos"
             class="todo"
             :key="todo.id"
-            :class="{ completed: todo.completed }"
-        >
+            :class="{ completed: todo.completed }">
           <div class="view">
             <input class="toggle" type="checkbox" v-model="todo.completed">
 
@@ -38,12 +37,12 @@
 </template>
 
 <script>
-import { reactive, toRefs, computed, watchEffect } from 'vue'
-import { useDebouncedRef, useMousePosition, useScroll } from './util'
+import { reactive, toRefs, computed, nextTick, watch } from 'vue'
+import { useDebouncedRef, useMousePosition, useScroll, useStorage } from './util'
 
 export default {
   setup() {
-    const state = reactive({
+    const state = useStorage('vite-app', {
       newTodo: '',
       todos: [
         {id: '1', title: '吃饭', completed: false},
@@ -57,7 +56,7 @@ export default {
       ]
     })
 
-    function addTodo() {
+    const addTodo = () => {
       const value = state.newTodo && state.newTodo.trim()
       if (!value) {
         return
@@ -70,33 +69,35 @@ export default {
       state.newTodo = ''
     }
 
-    const remaining = computed(
-      () => state.todos.filter(todo => !todo.completed).length
-    )
+    const remaining = computed(() => state.todos.filter(todo => !todo.completed).length)
+
     const allDone = computed({
-      get: function () {
-        return remaining.value === 0
-      },
-      set: function (value) {
+      get: () => remaining.value === 0,
+      set: value => {
         state.todos.forEach(function (todo) {
           todo.completed = value
         })
       }
     })
 
-    function removeTodo(todo) {
+    const removeTodo = todo => {
       state.todos.splice(state.todos.indexOf(todo), 1)
     }
-
-    function removeCompleted() {
-      state.todos = state.todos.filter(todo => !todo.completed)
+    watch(state.todos, (value) => {
+      value.map(item => console.log(item))
+    }, {deep: true})
+    const removeCompleted = () => {
+      nextTick(() => {
+        state.todos = state.todos.filter(todo => !todo.completed)
+      })
     }
-
     const {top} = useScroll()
     const {x, y} = useMousePosition()
 
     return {
-      ...toRefs(state), remaining, allDone,
+      ...toRefs(state),
+      remaining,
+      allDone,
       x, y, top,
       removeTodo,
       addTodo,
