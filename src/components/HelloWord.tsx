@@ -1,4 +1,4 @@
-import { defineComponent, ref } from 'vue';
+import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
   name: 'App',
@@ -13,9 +13,11 @@ export default defineComponent({
     return () => (
       <>
         <h1>{prop.msg}</h1>
-        <button onClick={() => {count.value ++}}>count is: { count.value }</button>
+        <button onClick={() => {
+          count.value++
+        }}>count is: {count.value}</button>
         <p>Edit <code>components/HelloWorld.vue</code> to test hot module replacement.</p>
       </>
-    );
-  },
-});
+    )
+  }
+})

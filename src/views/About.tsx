@@ -1,6 +1,6 @@
-import { defineComponent } from 'vue';
-import HelloWord from '../components/HelloWord';
-import Logo from '../assets/logo.png';
+import { defineComponent } from 'vue'
+import HelloWord from '../components/HelloWord'
+import Logo from '../assets/logo.png'
 
 export default defineComponent({
   name: 'App',
@@ -11,6 +11,6 @@ export default defineComponent({
         <img src={Logo}/>
         <HelloWord/>
       </>
-    );
+    )
   }
-});
+})
